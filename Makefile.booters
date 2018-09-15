@@ -22,9 +22,7 @@ LIBCRTEND=
 realall: ${PROG}
 
 .PATH:		${.CURDIR}/../common
-.if defined(PRE_ARCS)
-# XXX ?
-.else
+.if !defined(PRE_ARCS)
 .PATH.S:	${S}/dev/arcbios
 .endif
 AFLAGS+=	-D_LOCORE -D_KERNEL -mno-abicalls
@@ -44,9 +42,7 @@ CPPFLAGS+=	-DNETBSD_VERS='"${NETBSD_VERS}"'
 
 CPPFLAGS+=	-Dsgimips
 
-.if defined(PRE_ARCS)
-# XXX ?
-.else
+.if !defined(PRE_ARCS)
 .include "${S}/dev/arcbios/Makefile.inc"
 .endif
 
