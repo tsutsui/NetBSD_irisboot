@@ -22,7 +22,11 @@ LIBCRTEND=
 realall: ${PROG}
 
 .PATH:		${.CURDIR}/../common
+.if defined(PRE_ARCS)
+# XXX ?
+.else
 .PATH.S:	${S}/dev/arcbios
+.endif
 AFLAGS+=	-D_LOCORE -D_KERNEL -mno-abicalls
 CPPFLAGS+=	-nostdinc -D_STANDALONE -DNO_ABICALLS -I${.OBJDIR} -I${S}
 # compiler flags for smallest code size
@@ -40,13 +44,18 @@ CPPFLAGS+=	-DNETBSD_VERS='"${NETBSD_VERS}"'
 
 CPPFLAGS+=	-Dsgimips
 
+.if defined(PRE_ARCS)
+# XXX ?
+.else
 .include "${S}/dev/arcbios/Makefile.inc"
+.endif
 
 # We load the kernel at 420K in from the start of RAM to give the boot
 # loader plenty of breathing room.  Load the boot loader starting at
 # the second page of RAM.
 # A warm thank-you to SGI for making load addresses different :)
 LOAD_ADDRESS?=		0x88002000
+LOAD_ADDRESS_IP12?=	0x80368000
 LOAD_ADDRESS_IP32?=	0x80002000
 
 .include "${S}/conf/newvers_stand.mk"
