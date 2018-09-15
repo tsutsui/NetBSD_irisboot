@@ -66,14 +66,8 @@ int scsi_writex2A(uint8_t *, size_t, daddr_t, size_t);
 #define SCSIA_ADDR	0x1FB80122
 #define SCSID_ADDR	0x1FB80126
 
-/* Target is Personal IRIS R3000 36Mhz. */
-#define DELAY(n)							\
-do {									\
-        register int __N = 18 * n;					\
-        do {								\
-                __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));	\
-        } while (__N > 0);						\
-} while (/* CONSTCOND */ 0)
+/* Target is Personal IRIS R3000 36MHz. */
+#define CPUSPEED	36
 #endif
 
 #ifdef INDIGO_R4K_MODE
@@ -81,14 +75,8 @@ do {									\
 #define SCSIA_ADDR	0x1FB80122
 #define SCSID_ADDR	0x1FB80126
 
-/* Target is IRIS Indigo R4000 100Mhz. */
-#define DELAY(n)							\
-do {									\
-        register int __N = 50 * n;					\
-        do {								\
-                __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));	\
-        } while (__N > 0);							\
-} while (/* CONSTCOND */ 0)
+/* Target is IRIS Indigo R4000 100MHz. */
+#define CPUSPEED	100
 #endif
 
 #ifdef INDY_MODE
@@ -96,12 +84,14 @@ do {									\
 #define SCSIA_ADDR	0x1FBC0003
 #define SCSID_ADDR	0x1FBC0007
 
-/* Target is Indy 180Mhz. */
+/* Target is Indy 180MHz. */
+#define CPUSPEED	180
+#endif
+
 #define DELAY(n)							\
 do {									\
-        register int __N = 90 * n;					\
+        register int __N = (CPUSPEED) / 2 * n;				\
         do {								\
                 __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));	\
         } while (__N > 0);						\
 } while (/* CONSTCOND */ 0)
-#endif
