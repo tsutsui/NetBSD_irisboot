@@ -34,7 +34,7 @@
 start:
 	.set	noreorder
 #ifdef __GP_SUPPORT__
-	la      gp, _C_LABEL (_gp)
+	la	gp, _C_LABEL(_gp)
 #endif
 	/*
 	 * We assume the bootprom isn't expecting us to preserve the saved
@@ -45,21 +45,21 @@ start:
 	move	s2, a2				# save envp
 	move	s3, ra				# save RA
 
-	la	a0, _C_LABEL (edata)	# clear BSS
+	la	a0, _C_LABEL(edata)		# clear BSS
 	move	a1, zero
-	la	a2, _C_LABEL (end)
+	la	a2, _C_LABEL(end)
 	jal	_C_LABEL(memset)		# memset(edata, 0, end - edata)
-	subu	a2, a2, a0
+	 subu	a2, a2, a0
 
 	move	a0, s0				# restore argc
 	move	a1, s1				# restore argv
 	move	a2, s2				# restore envp
 	j	_C_LABEL(main)			# main(argc, argv)
-	move	ra, s3				# restore RA
+	 move	ra, s3				# restore RA
 
 LEAF(romrestart)
 XLEAF(_rtt)
-	PTR_LA v0,   0xBFC00000		# indigo RESET
-    j      v0
-	nop
+	PTR_LA	v0, 0xBFC00000			# indigo RESET
+	j	v0
+	 nop
 END(romrestart)

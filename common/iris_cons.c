@@ -56,13 +56,13 @@ struct consdev *cn_tab;
 char *
 cninit(int *addr, int *speed)
 {
-	register struct consdev *cp;
+	struct consdev *cp;
 
 	cn_tab = NULL;
 	for (cp = constab; cp->cn_probe; cp++) {
 		(*cp->cn_probe)(cp);
 		if (cp->cn_pri > CN_DEAD &&
-		   (cn_tab == NULL || cp->cn_pri > cn_tab->cn_pri))
+		    (cn_tab == NULL || cp->cn_pri > cn_tab->cn_pri))
 			cn_tab = cp;
 	}
 	if (cn_tab) {
@@ -78,6 +78,7 @@ cninit(int *addr, int *speed)
 int
 cngetc(void)
 {
+
 	if (cn_tab)
 		return (*cn_tab->cn_getc)(cn_tab->cn_dev);
 	return 0;
@@ -86,6 +87,7 @@ cngetc(void)
 void
 cnputc(int c)
 {
+
 	if (cn_tab)
 		(*cn_tab->cn_putc)(cn_tab->cn_dev, c);
 }
@@ -93,6 +95,7 @@ cnputc(int c)
 int
 cnscan(void)
 {
+
 	if (cn_tab)
 		return (*cn_tab->cn_scan)(cn_tab->cn_dev);
 	return -1;
@@ -101,7 +104,8 @@ cnscan(void)
 void
 zscnprobe(struct consdev *cp)
 {
-		cp->cn_pri = CN_REMOTE;
+
+	cp->cn_pri = CN_REMOTE;
 }
 
 void

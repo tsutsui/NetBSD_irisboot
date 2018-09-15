@@ -47,17 +47,17 @@
 static void zs_write(void *, uint8_t);
 static void zs_write_reg(void *, uint8_t, uint8_t);
 static void zs_reset(void *);
-static struct zschan *zs_get_chan_addr (int zs_unit, int channel);
-int		zs_getc (void *);
-void	zs_putc (void *, int);
-int		zs_scan (void *);
+static struct zschan *zs_get_chan_addr(int zs_unit, int channel);
+int	zs_getc(void *);
+void	zs_putc(void *, int);
+int	zs_scan(void *);
 
-static int  cons_port;
+static int cons_port;
 
 static void
 zs_write(void *dev, uint8_t val)
 {
-	register volatile struct zschan *zc = dev;
+	struct zschan *zc = dev;
 
 	zc->zc_csr = val;
 	ZS_DELAY();
@@ -74,6 +74,7 @@ zs_write_reg(void *dev, uint8_t reg, uint8_t val)
 static void
 zs_reset(void *dev)
 {
+
 	/* clear errors */
 	zs_write_reg(dev,  9, 0);
 	/* hardware reset */
@@ -94,7 +95,8 @@ zs_reset(void *dev)
 	zs_write_reg(dev,  7, 0);
 
 	/* set clock mode */
-	zs_write_reg(dev, 11, ZSWR11_RXCLK_BAUD | ZSWR11_TXCLK_BAUD | ZSWR11_TRXC_OUT_ENA);
+	zs_write_reg(dev, 11,
+	    ZSWR11_RXCLK_BAUD | ZSWR11_TXCLK_BAUD | ZSWR11_TRXC_OUT_ENA);
 
 	/* set baud rate constant */
 	zs_write_reg(dev, 12, BPS_TO_TCONST(ZSCLOCK / 16, ZS_DEFSPEED));
@@ -122,11 +124,11 @@ zs_get_chan_addr(int zs_unit, int channel)
 	struct zsdevice *addr;
 	struct zschan *zc;
 
-	addr = (struct zsdevice *) MIPS_PHYS_TO_KSEG1(ZS_ADDR);
+	addr = (struct zsdevice *)MIPS_PHYS_TO_KSEG1(ZS_ADDR);
 
 	zc = &addr->zs_chan_b;
 
-	return (zc);
+	return zc;
 }
 
 void *
@@ -181,8 +183,8 @@ zscngetc(void *dev)
 int
 zs_getc(void *arg)
 {
-	register volatile struct zschan *zc = arg;
-	register int c, rr0;
+	struct zschan *zc = arg;
+	int c, rr0;
 
 	/* Wait for a character to arrive. */
 	do {
@@ -193,7 +195,7 @@ zs_getc(void *arg)
 	c = zc->zc_data;
 	ZS_DELAY();
 
-	return (c);
+	return c;
 }
 
 int
@@ -209,19 +211,19 @@ zscnscanc(void *dev)
 int
 zs_scan(void *arg)
 {
-	register volatile struct zschan *zc = arg;
-	register int c, rr0;
+	struct zschan *zc = arg;
+	int c, rr0;
 
 	/* Wait for a character to arrive. */
 	rr0 = zc->zc_csr;
 	ZS_DELAY();
 
 	if ((rr0 & ZSRR0_RX_READY) == 0) {
-			return -1;
-		}
+		return -1;
+	}
 
 	c = zc->zc_data;
 	ZS_DELAY();
 
-	return (c);
+	return c;
 }

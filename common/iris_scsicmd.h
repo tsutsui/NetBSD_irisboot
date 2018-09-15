@@ -30,37 +30,37 @@
 /*
  * scsipi_xfer status flags
  */
-#define	XS_STS_DONE		0x00000001
+#define XS_STS_DONE		0x00000001
 
 /* SCSI Commands */
 #define CMD_TEST_UNIT_READY		0x00
 #define CMD_REQUEST_SENSE		0x03
-#define	CMD_INQUIRY				0x12
+#define CMD_INQUIRY			0x12
 #define CMD_SEND_DIAGNOSTIC		0x1D
 
-#define CMD_REWIND				0x01
-#define CMD_REZERO				0x01
+#define CMD_REWIND			0x01
+#define CMD_REZERO			0x01
 #define CMD_FORMAT_UNIT			0x04
-#define CMD_READ_BLOCK_LIMITS	0x05
+#define CMD_READ_BLOCK_LIMITS		0x05
 #define CMD_REASSIGN_BLOCKS		0x07
-#define CMD_READ				0x08
-#define CMD_WRITE				0x0A
+#define CMD_READ			0x08
+#define CMD_WRITE			0x0A
 #define CMD_WRITE_FILEMARK		0x10
-#define CMD_SPACE				0x11
+#define CMD_SPACE			0x11
 #define CMD_MODE_SELECT			0x15
 #define CMD_RELEASE_UNIT		0x17
-#define CMD_ERASE				0x19
+#define CMD_ERASE			0x19
 #define CMD_MODE_SENSE			0x1A
 #define CMD_LOADUNLOAD			0x1B
 #define CMD_RECEIVE_DIAG		0x1C
 #define CMD_SEND_DIAG			0x1D
-#define CMD_P_A_MEDIA_REMOVAL	0x1E
+#define CMD_P_A_MEDIA_REMOVAL		0x1E
 #define CMD_READ_CAPACITY		0x25
 #define CMD_READ_EXT			0x28
 #define CMD_WRITE_EXT			0x2A
-#define CMD_READ_DEFECT_DATA	0x37
-#define		SD_MANUFAC_DEFECTS	0x14000000
-#define		SD_GROWN_DEFECTS	0x0c000000
+#define CMD_READ_DEFECT_DATA		0x37
+#define 	SD_MANUFAC_DEFECTS	0x14000000
+#define 	SD_GROWN_DEFECTS	0x0c000000
 #define CMD_READ_BUFFER			0x3B
 #define CMD_WRITE_BUFFER		0x3C
 #define CMD_READ_FULL			0xF0
@@ -73,26 +73,26 @@
 /* command descriptor blocks */
 
 struct scsi_cdb6 {
-	u_char	cmd;		/* command code */
-	u_char	lun:  3,	/* logical unit on ctlr */
+	uint8_t	cmd;		/* command code */
+	uint8_t	lun:  3,	/* logical unit on ctlr */
 		lbah: 5;	/* msb of read/write logical block addr */
-	u_char	lbam;		/* middle byte of l.b.a. */
-	u_char	lbal;		/* lsb of l.b.a. */
-	u_char	len;		/* transfer length */
-	u_char	xtra;
+	uint8_t	lbam;		/* middle byte of l.b.a. */
+	uint8_t	lbal;		/* lsb of l.b.a. */
+	uint8_t	len;		/* transfer length */
+	uint8_t	xtra;
 };
 
 struct scsi_cdb10 {
-	u_char	cmd;		/* command code */
-	u_char	lun: 3,		/* logical unit on ctlr */
+	uint8_t	cmd;		/* command code */
+	uint8_t	lun: 3,		/* logical unit on ctlr */
 		   : 4,
 		rel: 1;		/* l.b.a. is relative addr if =1 */
-	u_char	lbah;		/* msb of read/write logical block addr */
-	u_char	lbahm;		/* high middle byte of l.b.a. */
-	u_char	lbalm;		/* low middle byte of l.b.a. */
-	u_char	lbal;		/* lsb of l.b.a. */
-	u_char	reserved;
-	u_char	lenh;		/* msb transfer length */
-	u_char	lenl;		/* lsb transfer length */
-	u_char	xtra;
+	uint8_t	lbah;		/* msb of read/write logical block addr */
+	uint8_t	lbahm;		/* high middle byte of l.b.a. */
+	uint8_t	lbalm;		/* low middle byte of l.b.a. */
+	uint8_t	lbal;		/* lsb of l.b.a. */
+	uint8_t	reserved;
+	uint8_t	lenh;		/* msb transfer length */
+	uint8_t	lenl;		/* lsb transfer length */
+	uint8_t	xtra;
 };

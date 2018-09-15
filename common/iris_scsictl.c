@@ -49,10 +49,9 @@ scsi_readx25(uint8_t *buf, size_t olen)
 	size_t len = olen;
 	size_t *lenp;
 	lenp = &len;
-
 	struct wd33c93_softc *sc = &wd33c93_softc[scsi_ctlr];
-	
 	static struct scsi_cdb10 cdb = { CMD_READ_CAPACITY };
+
 	return wd33c93_go(sc, (uint8_t *)&cdb, sizeof(cdb), buf, lenp);
 }
 
@@ -62,11 +61,9 @@ scsi_readx28(uint8_t *buf, size_t olen, daddr_t blk, u_int nblk)
 	size_t len = olen;
 	size_t *lenp;
 	lenp = &len;
-
-
 	struct wd33c93_softc *sc = &wd33c93_softc[scsi_ctlr];
 	struct scsi_cdb10 cdb;
-	
+
 	memset(&cdb, 0, sizeof(cdb));
 	cdb.cmd = CMD_READ_EXT;
 	cdb.lbah = blk >> 24;
@@ -107,5 +104,4 @@ scsi_writex2A(uint8_t *buf, size_t olen, daddr_t blk, u_int nblk)
 		return 1;
 
 	return 0;
-
 }

@@ -74,9 +74,9 @@ main(int argc, char **argv)
 	u_long marks[MARK_MAX];
 	int win = 0;
 	int zs_addr, speed;
-	
+
 	cninit(&zs_addr, &speed);
- 
+
  	/* print a banner */
 	printf("\n");
 	printf("%s " NETBSD_VERS " Yet another Bootstrap, Revision %s\n",
@@ -84,7 +84,7 @@ main(int argc, char **argv)
 	printf("\n");
 
 	memset(marks, 0, sizeof marks);
-	
+
 	/* initialise bootinfo structure early */
 	bi_init(bootinfo);
 
@@ -115,7 +115,7 @@ main(int argc, char **argv)
 	bi_syms.esym = marks[MARK_END];
 	bi_add(&bi_syms, BTINFO_SYMTAB, sizeof(bi_syms));
 	entry = (void *)marks[MARK_ENTRY];
-	
+
 	(*entry)(argc, argv, BOOTINFO_MAGIC, bootinfo);
 
 	printf("Kernel returned!  Halting...\n");
@@ -125,6 +125,7 @@ main(int argc, char **argv)
 void
 abort(void)
 {
+
 	printf("Invalid argument\n");
 	printf("i.e., dksc(0,X,8)loader dksc(0,X,0)/kernel\n");
 #ifdef INDIGO_R3K_MODE

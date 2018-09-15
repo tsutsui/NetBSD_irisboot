@@ -34,5 +34,7 @@
 void
 find_devs(void)
 {
-	wd33c93_init((void *)MIPS_PHYS_TO_KSEG1(SCSIA_ADDR), (void *)MIPS_PHYS_TO_KSEG1(SCSID_ADDR));
+
+	wd33c93_init((void *)MIPS_PHYS_TO_KSEG1(SCSIA_ADDR),
+	    (void *)MIPS_PHYS_TO_KSEG1(SCSID_ADDR));
 }

@@ -30,46 +30,46 @@
  */
 
 #define SBIC_myid 		0
-#define SBIC_cdbsize	0
-#define SBIC_control	1
+#define SBIC_cdbsize		0
+#define SBIC_control		1
 #define SBIC_timeo 		2
 #define SBIC_cdb1 		3
 #define SBIC_tsecs 		3
 #define SBIC_cdb2 		4
-#define SBIC_theads 	4
+#define SBIC_theads 		4
 #define SBIC_cdb3 		5
-#define SBIC_tcyl_hi	5
+#define SBIC_tcyl_hi		5
 #define SBIC_cdb4 		6
-#define SBIC_tcyl_lo	6
+#define SBIC_tcyl_lo		6
 #define SBIC_cdb5 		7
-#define SBIC_addr_hi	7
+#define SBIC_addr_hi		7
 #define SBIC_cdb6 		8
-#define SBIC_addr_2 	8
+#define SBIC_addr_2 		8
 #define SBIC_cdb7 		9
-#define SBIC_addr_3 	9
+#define SBIC_addr_3 		9
 #define SBIC_cdb8 		10
-#define SBIC_addr_lo 	10
+#define SBIC_addr_lo 		10
 #define SBIC_cdb9 		11
 #define SBIC_secno		11
 #define SBIC_cdb10		12
 #define SBIC_headno		12
 #define SBIC_cdb11		13
-#define SBIC_cylno_hi	13
+#define SBIC_cylno_hi		13
 #define SBIC_cdb12		14
-#define SBIC_cylno_lo	14
+#define SBIC_cylno_lo		14
 #define SBIC_tlun		15
-#define SBIC_cmd_phase	16
+#define SBIC_cmd_phase		16
 #define SBIC_syn		17
-#define SBIC_count_hi	18
-#define SBIC_count_med	19
-#define SBIC_count_lo	20
+#define SBIC_count_hi		18
+#define SBIC_count_med		19
+#define SBIC_count_lo		20
 #define SBIC_selid		21
 #define SBIC_rselid		22
 #define SBIC_csr		23
 #define SBIC_cmd		24
 #define SBIC_data		25
-#define SBIC_queue_tag	26
-#define	SBIC_aux_status	27
+#define SBIC_queue_tag		26
+#define SBIC_aux_status		27
 
 /* wd33c93_asr is addressed directly */
 
@@ -86,21 +86,21 @@
 #define SBIC_ASR_BSY		0x20	/* Busy, only cmd/data/asr readable */
 #define SBIC_ASR_CIP		0x10	/* Busy, cmd unavail also */
 #define SBIC_ASR_xxx		0x0c
-#define SBIC_ASR_PE			0x02	/* Parity error (even) */
+#define SBIC_ASR_PE		0x02	/* Parity error (even) */
 #define SBIC_ASR_DBR		0x01	/* Data Buffer Ready */
 
 /*
  * My ID register, and/or CDB Size
  */
 
-#define SBIC_ID_FS_8_10			0x00	/* Input clock is  8-10 MHz */
+#define SBIC_ID_FS_8_10		0x00	/* Input clock is  8-10 MHz */
 										/* 11 MHz is invalid */
-#define SBIC_ID_FS_12_15		0x40	/* Input clock is 12-15 MHz */
-#define SBIC_ID_FS_16_20		0x80	/* Input clock is 16-20 MHz */
-#define SBIC_ID_RAF				0x20	/* Enable Really Advanced Features */
-#define SBIC_ID_EHP				0x10	/* Enable host parity */
-#define SBIC_ID_EAF				0x08	/* Enable Advanced Features */
-#define SBIC_ID_MASK			0x07
+#define SBIC_ID_FS_12_15	0x40	/* Input clock is 12-15 MHz */
+#define SBIC_ID_FS_16_20	0x80	/* Input clock is 16-20 MHz */
+#define SBIC_ID_RAF		0x20	/* Enable Really Advanced Features */
+#define SBIC_ID_EHP		0x10	/* Enable host parity */
+#define SBIC_ID_EAF		0x08	/* Enable Advanced Features */
+#define SBIC_ID_MASK		0x07
 #define SBIC_ID_CBDSIZE_MASK	0x0f	/* if unk SCSI cmd group */
 
 /*
@@ -114,7 +114,7 @@
 #define SBIC_CTL_HHP		0x10	/* Halt on host parity error */
 #define SBIC_CTL_EDI		0x08	/* Ending disconnect interrupt */
 #define SBIC_CTL_IDI		0x04	/* Intermediate disconnect interrupt*/
-#define SBIC_CTL_HA			0x02	/* Halt on ATN */
+#define SBIC_CTL_HA		0x02	/* Halt on ATN */
 #define SBIC_CTL_scP		0x01	/* Halt on SCSI parity error */
 
 /*
@@ -151,8 +151,8 @@
  * FIFO register
  */
 
-#define SBIC_FIFO_93_DEPTH		5
-#define SBIC_FIFO_93AB_DEPTH		12
+#define SBIC_FIFO_93_DEPTH	5
+#define SBIC_FIFO_93AB_DEPTH	12
 
 /*
  * maximum possible size in TC registers. Since this is 24 bit, it's easy
@@ -172,8 +172,8 @@
 #define SBIC_SYN_MIN_PERIOD	2	/* upto 8, encoded as 0 */
 #define SBIC_SYN_FSS		0x80	/* Enable Fast SCSI Transfers (10MB/s)*/
 
-#define SBIC_SYN(o,p,f) \
-    (((o) & SBIC_SYN_OFF_MASK) | (((p) << 4) & SBIC_SYN_PER_MASK) | \
+#define SBIC_SYN(o, p, f)						\
+    (((o) & SBIC_SYN_OFF_MASK) | (((p) << 4) & SBIC_SYN_PER_MASK) |	\
      ((f) ? SBIC_SYN_FSS : 0))
 
 /*
@@ -196,8 +196,8 @@
  * Source ID (rselid) register
  */
 
-#define SBIC_RID_ER			0x80	/* Enable reselection */
-#define SBIC_RID_ES			0x40	/* Enable selection */
+#define SBIC_RID_ER		0x80	/* Enable reselection */
+#define SBIC_RID_ES		0x40	/* Enable selection */
 #define SBIC_RID_DSP		0x20	/* Disable select parity */
 #define SBIC_RID_SIV		0x08	/* Source ID valid */
 #define SBIC_RID_MASK		0x07
@@ -206,53 +206,53 @@
  * Status register
  */
 
-#define SBIC_CSR_CAUSE			0xf0
-#define SBIC_CSR_RESET			0x00	/* chip was reset */
-#define SBIC_CSR_CMD_DONE		0x10	/* cmd completed */
+#define SBIC_CSR_CAUSE		0xf0
+#define SBIC_CSR_RESET		0x00	/* chip was reset */
+#define SBIC_CSR_CMD_DONE	0x10	/* cmd completed */
 #define SBIC_CSR_CMD_STOPPED	0x20	/* interrupted or abrted*/
-#define SBIC_CSR_CMD_ERR		0x40	/* end with error */
+#define SBIC_CSR_CMD_ERR	0x40	/* end with error */
 #define SBIC_CSR_BUS_SERVICE	0x80	/* REQ pending on the bus */
 
 
-#define SBIC_CSR_QUALIFIER		0x0f
+#define SBIC_CSR_QUALIFIER	0x0f
 /* Reset State Interrupts */
-#define SBIC_CSR_RESET			0x00	/* reset w/advanced features*/
-#define SBIC_CSR_RESET_AM		0x01	/* reset w/advanced features*/
+#define SBIC_CSR_RESET		0x00	/* reset w/advanced features*/
+#define SBIC_CSR_RESET_AM	0x01	/* reset w/advanced features*/
 /* Successful Completion Interrupts */
-#define SBIC_CSR_TARGET			0x10	/* reselect complete */
-#define SBIC_CSR_INITIATOR		0x11	/* select complete */
-#define SBIC_CSR_WO_ATN			0x13	/* tgt mode completion */
-#define SBIC_CSR_W_ATN			0x14	/* ditto */
-#define SBIC_CSR_XLATED			0x15	/* translate address cmd */
-#define SBIC_CSR_S_XFERRED		0x16	/* initiator mode completion*/
-#define SBIC_CSR_XFERRED		0x18	/* phase in low bits */
+#define SBIC_CSR_TARGET		0x10	/* reselect complete */
+#define SBIC_CSR_INITIATOR	0x11	/* select complete */
+#define SBIC_CSR_WO_ATN		0x13	/* tgt mode completion */
+#define SBIC_CSR_W_ATN		0x14	/* ditto */
+#define SBIC_CSR_XLATED		0x15	/* translate address cmd */
+#define SBIC_CSR_S_XFERRED	0x16	/* initiator mode completion*/
+#define SBIC_CSR_XFERRED	0x18	/* phase in low bits */
 /* Paused or Aborted Interrupts */
 #define SBIC_CSR_MSGIN_W_ACK	0x20	/* (I) msgin, ACK asserted*/
-#define SBIC_CSR_SDP			0x21	/* (I) SDP msg received */
-#define SBIC_CSR_SEL_ABRT		0x22	/* sel/resel aborted */
-#define SBIC_CSR_XFR_PAUSED		0x23	/* (T) no ATN */
+#define SBIC_CSR_SDP		0x21	/* (I) SDP msg received */
+#define SBIC_CSR_SEL_ABRT	0x22	/* sel/resel aborted */
+#define SBIC_CSR_XFR_PAUSED	0x23	/* (T) no ATN */
 #define SBIC_CSR_XFR_PAUSED_ATN	0x24	/* (T) ATN is asserted */
-#define SBIC_CSR_RSLT_AM		0x27	/* (I) lost selection (AM) */
-#define SBIC_CSR_MIS			0x28	/* (I) xfer aborted, ph mis */
+#define SBIC_CSR_RSLT_AM	0x27	/* (I) lost selection (AM) */
+#define SBIC_CSR_MIS		0x28	/* (I) xfer aborted, ph mis */
 /* Terminated Interrupts */
 #define SBIC_CSR_CMD_INVALID	0x40
-#define SBIC_CSR_DISC			0x41	/* (I) tgt disconnected */
-#define SBIC_CSR_SEL_TIMEO		0x42
-#define SBIC_CSR_PE				0x43	/* parity error */
-#define SBIC_CSR_PE_ATN			0x44	/* ditto, ATN is asserted */
+#define SBIC_CSR_DISC		0x41	/* (I) tgt disconnected */
+#define SBIC_CSR_SEL_TIMEO	0x42
+#define SBIC_CSR_PE		0x43	/* parity error */
+#define SBIC_CSR_PE_ATN		0x44	/* ditto, ATN is asserted */
 #define SBIC_CSR_XLATE_TOOBIG	0x45
-#define SBIC_CSR_RSLT_NOAM		0x46	/* (I) lost sel, no AM mode */
-#define SBIC_CSR_BAD_STATUS		0x47	/* status byte was nok */
-#define SBIC_CSR_MIS_1			0x48	/* ph mis, see low bits */
+#define SBIC_CSR_RSLT_NOAM	0x46	/* (I) lost sel, no AM mode */
+#define SBIC_CSR_BAD_STATUS	0x47	/* status byte was nok */
+#define SBIC_CSR_MIS_1		0x48	/* ph mis, see low bits */
 /* Service Required Interrupts */
-#define SBIC_CSR_RSLT_NI		0x80	/* reselected, no ify msg */
-#define SBIC_CSR_RSLT_IFY		0x81	/* ditto, AM mode, got ify */
-#define SBIC_CSR_SLT			0x82	/* selected, no ATN */
-#define SBIC_CSR_SLT_ATN		0x83	/* selected with ATN */
-#define SBIC_CSR_ATN			0x84	/* (T) ATN asserted */
-#define SBIC_CSR_DISC_1			0x85	/* (I) bus is free */
-#define SBIC_CSR_UNK_GROUP		0x87	/* strange CDB1 */
-#define SBIC_CSR_MIS_2			0x88	/* (I) ph mis, see low bits */
+#define SBIC_CSR_RSLT_NI	0x80	/* reselected, no ify msg */
+#define SBIC_CSR_RSLT_IFY	0x81	/* ditto, AM mode, got ify */
+#define SBIC_CSR_SLT		0x82	/* selected, no ATN */
+#define SBIC_CSR_SLT_ATN	0x83	/* selected with ATN */
+#define SBIC_CSR_ATN		0x84	/* (T) ATN asserted */
+#define SBIC_CSR_DISC_1		0x85	/* (I) bus is free */
+#define SBIC_CSR_UNK_GROUP	0x87	/* strange CDB1 */
+#define SBIC_CSR_MIS_2		0x88	/* (I) ph mis, see low bits */
 
 #define SBIC_PHASE(csr)		SCSI_PHASE(csr)
 
@@ -277,36 +277,36 @@
 #define SBIC_CMD_XFER_INFO	0x20	/* (  I) lev II */
 
 		    /* Target state */
-#define SBIC_CMD_SND_DISC		0x0e	/* ( T ) lev II */
-#define SBIC_CMD_RCV_CMD		0x10	/* ( T ) lev II */
-#define SBIC_CMD_RCV_DATA		0x11	/* ( T ) lev II */
+#define SBIC_CMD_SND_DISC	0x0e	/* ( T ) lev II */
+#define SBIC_CMD_RCV_CMD	0x10	/* ( T ) lev II */
+#define SBIC_CMD_RCV_DATA	0x11	/* ( T ) lev II */
 #define SBIC_CMD_RCV_MSG_OUT	0x12	/* ( T ) lev II */
-#define SBIC_CMD_RCV			0x13	/* ( T ) lev II */
-#define SBIC_CMD_SND_STATUS		0x14	/* ( T ) lev II */
-#define SBIC_CMD_SND_DATA		0x15	/* ( T ) lev II */
-#define SBIC_CMD_SND_MSG_IN		0x16	/* ( T ) lev II */
-#define SBIC_CMD_SND			0x17	/* ( T ) lev II */
+#define SBIC_CMD_RCV		0x13	/* ( T ) lev II */
+#define SBIC_CMD_SND_STATUS	0x14	/* ( T ) lev II */
+#define SBIC_CMD_SND_DATA	0x15	/* ( T ) lev II */
+#define SBIC_CMD_SND_MSG_IN	0x16	/* ( T ) lev II */
+#define SBIC_CMD_SND		0x17	/* ( T ) lev II */
 
 		    /* Disconnected state */
-#define SBIC_CMD_RESELECT		0x05	/* (D  ) lev II */
-#define SBIC_CMD_SEL_ATN		0x06	/* (D  ) lev II */
-#define SBIC_CMD_SEL			0x07	/* (D  ) lev II */
+#define SBIC_CMD_RESELECT	0x05	/* (D  ) lev II */
+#define SBIC_CMD_SEL_ATN	0x06	/* (D  ) lev II */
+#define SBIC_CMD_SEL		0x07	/* (D  ) lev II */
 #define SBIC_CMD_SEL_ATN_XFER	0x08	/* (D I) lev II */
-#define SBIC_CMD_SEL_XFER		0x09	/* (D I) lev II */
+#define SBIC_CMD_SEL_XFER	0x09	/* (D I) lev II */
 #define SBIC_CMD_RESELECT_RECV	0x0a	/* (DT ) lev II */
 #define SBIC_CMD_RESELECT_SEND	0x0b	/* (DT ) lev II */
 #define SBIC_CMD_WAIT_SEL_RECV	0x0c	/* (DT ) lev II */
 
 
 #define PHASE_MASK		0x07	/* mask for psns/pctl phase */
-#define DATA_OUT_PHASE	0x00
-#define DATA_IN_PHASE	0x01
+#define DATA_OUT_PHASE		0x00
+#define DATA_IN_PHASE		0x01
 #define CMD_PHASE		0x02
-#define STATUS_PHASE	0x03
-#define BUS_FREE_PHASE	0x04
-#define ARB_SEL_PHASE	0x05	/* Fuji chip combines bus arb with sel. */
-#define MESG_OUT_PHASE	0x06
-#define MESG_IN_PHASE	0x07
+#define STATUS_PHASE		0x03
+#define BUS_FREE_PHASE		0x04
+#define ARB_SEL_PHASE		0x05	/* Fuji chip combines bus arb with sel. */
+#define MESG_OUT_PHASE		0x06
+#define MESG_IN_PHASE		0x07
 
 #define SCSI_PHASE(reg)	((reg) & PHASE_MASK)
 
@@ -321,17 +321,17 @@
  * like to keep them apart.
  */
 
-#define wd33c93_read_reg(sc,regno,val)		\
-	do {					\
-		*(volatile u_int8_t *)(sc)->sc_asr_regh = (regno);	\
-		(val) = *(volatile u_int8_t *)(sc)->sc_data_regh;	\
-	} while (0)
+#define wd33c93_read_reg(sc, regno, val)				\
+	do {								\
+		*(volatile uint8_t *)(sc)->sc_asr_regh = (regno);	\
+		(val) = *(volatile uint8_t *)(sc)->sc_data_regh;	\
+	} while (/* CONSTCOND */0)
 
-#define wd33c93_write_reg(sc,regno,val)		\
-	do {					\
-		*(volatile u_int8_t *)(sc)->sc_asr_regh = (regno);	\
-		*(volatile u_int8_t *)(sc)->sc_data_regh = (val);	\
-	} while (0)
+#define wd33c93_write_reg(sc, regno, val)				\
+	do {								\
+		*(volatile uint8_t *)(sc)->sc_asr_regh = (regno);	\
+		*(volatile uint8_t *)(sc)->sc_data_regh = (val);	\
+	} while (/* CONSTCOND */0)
 
 #define SET_SBIC_myid(sc,val)		wd33c93_write_reg(sc,SBIC_myid,val)
 #define GET_SBIC_myid(sc,val)		wd33c93_read_reg(sc,SBIC_myid,val)
@@ -390,34 +390,34 @@
 #define SET_SBIC_queue_tag(sc,val)	wd33c93_write_reg(sc,SBIC_queue_tag,val)
 #define GET_SBIC_queue_tag(sc,val)	wd33c93_read_reg(sc,SBIC_queue_tag,val)
 
-#define SBIC_TC_PUT(sc,val)						\
-    do {								\
-	wd33c93_write_reg(sc,SBIC_count_hi,((val)>>16));		\
-	*(volatile u_int8_t *)(sc)->sc_data_regh = (val) >> 8;       			\
-	*(volatile u_int8_t *)(sc)->sc_data_regh = (val);				\
-    } while (0)
+#define SBIC_TC_PUT(sc, val)						\
+	do {								\
+		wd33c93_write_reg(sc, SBIC_count_hi, ((val) >> 16));	\
+		*(volatile uint8_t *)(sc)->sc_data_regh = (val) >> 8; 	\
+		*(volatile uint8_t *)(sc)->sc_data_regh = (val);	\
+	} while (/* CONSTCOND */0)
 
-#define GET_SBIC_asr(sc,val)						\
-    do {								\
-	(val) = *(volatile u_int8_t *)(sc)->sc_asr_regh;	\
-    } while (0)
+#define GET_SBIC_asr(sc, val)						\
+	do {								\
+		(val) = *(volatile uint8_t *)(sc)->sc_asr_regh;		\
+	} while (/* CONSTCOND */0)
 
 #define WAIT_CIP(sc)							\
 	do {								\
-		while (*(volatile u_int8_t *)(sc)->sc_asr_regh & SBIC_ASR_CIP)			\
-			;						\
-	} while (0)
+		while (*(volatile uint8_t *)(sc)->sc_asr_regh & SBIC_ASR_CIP) \
+			continue;					\
+	} while (/* CONSTCOND */0)
 
 /*
  * transmit a byte in programmed I/O mode
  */
 #define SEND_BYTE(sc, ch)						\
-    do {								\
-	WAIT_CIP(sc);							\
-	SET_SBIC_cmd(sc, SBIC_CMD_SBT | SBIC_CMD_XFER_INFO);		\
-	SBIC_WAIT(sc, SBIC_ASR_DBR, 0);					\
-	SET_SBIC_data(sc, ch);						\
-    } while (0)
+	do {								\
+		WAIT_CIP(sc);						\
+		SET_SBIC_cmd(sc, SBIC_CMD_SBT | SBIC_CMD_XFER_INFO);	\
+		SBIC_WAIT(sc, SBIC_ASR_DBR, 0);				\
+		SET_SBIC_data(sc, ch);					\
+	} while (/* CONSTCOND */0)
 
 /*
  * receive a byte in programmed I/O mode
@@ -426,6 +426,6 @@
 	do {								\
 		WAIT_CIP(sc);						\
 		SET_SBIC_cmd(sc, SBIC_CMD_SBT | SBIC_CMD_XFER_INFO);	\
-		SBIC_WAIT(sc, SBIC_ASR_DBR, 0);			\
-		GET_SBIC_data(sc, ch);				\
-	} while (0)
+		SBIC_WAIT(sc, SBIC_ASR_DBR, 0);				\
+		GET_SBIC_data(sc, ch);					\
+	} while (/* CONSTCOND */0)

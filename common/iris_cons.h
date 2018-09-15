@@ -32,21 +32,21 @@ struct consdev {
 	int	address;	/* address */
 	int	speed;		/* speed(serial only) */
 	void	(*cn_probe)	/* probe hardware and fill in consdev info */
-(struct consdev *);
+		    (struct consdev *);
 	void	(*cn_init)	/* turn on as console */
-(struct consdev *);
+		    (struct consdev *);
 	int	(*cn_getc)	/* getchar interface */
-(void *);
+		    (void *);
 	void	(*cn_putc)	/* putchar interface */
-(void *, int);
+		    (void *, int);
 	int	(*cn_scan)	/* scan interface */
-(void *);
+		    (void *);
 	int	cn_pri;		/* pecking order; the higher the better */
 	void	*cn_dev;	/* device data tag */
 };
 
 /* values for cn_pri - reflect our policy for console selection */
-#define	CN_DEAD		0	/* device doesn't exist */
+#define CN_DEAD		0	/* device doesn't exist */
 #define CN_NORMAL	1	/* device exists but is nothing special */
 #define CN_INTERNAL	2	/* "internal" bit-mapped display */
 #define CN_REMOTE	3	/* serial interface with remote bit set */

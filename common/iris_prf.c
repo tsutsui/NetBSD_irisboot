@@ -33,11 +33,13 @@
 void
 putchar(int c)
 {
+
 	cnputc(c);
 }
 
 int
 getchar(void)
 {
+
 	return cngetc();
 }

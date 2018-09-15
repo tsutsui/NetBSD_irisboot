@@ -55,53 +55,53 @@ int wd33c93_go(struct wd33c93_softc *, uint8_t *, size_t, uint8_t *, size_t *);
 
 /* iris_scsictl.c */
 int scsi_test_unit_rdy(void);
-int scsi_readx25(u_char *, size_t);
-int scsi_readx28(u_char *, size_t, daddr_t, size_t);
-int scsi_writex2A(u_char *, size_t, daddr_t, size_t);
+int scsi_readx25(uint8_t *, size_t);
+int scsi_readx28(uint8_t *, size_t, daddr_t, size_t);
+int scsi_writex2A(uint8_t *, size_t, daddr_t, size_t);
 
 #define INDIGO_R3K_MODE
 
 #ifdef INDIGO_R3K_MODE
-#define ZS_ADDR 0x1fb80d10
-#define SCSIA_ADDR 0x1FB80122
-#define SCSID_ADDR 0x1FB80126
+#define ZS_ADDR		0x1fb80d10
+#define SCSIA_ADDR	0x1FB80122
+#define SCSID_ADDR	0x1FB80126
 
 /* Target is Personal IRIS R3000 36Mhz. */
 #define DELAY(n)							\
-do {							\
-        register int __N = 18 * n;							\
-        do {							\
-                __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));							\
-        } while (__N > 0);							\
+do {									\
+        register int __N = 18 * n;					\
+        do {								\
+                __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));	\
+        } while (__N > 0);						\
 } while (/* CONSTCOND */ 0)
 #endif
 
 #ifdef INDIGO_R4K_MODE
-#define ZS_ADDR 0x1fb80d10
-#define SCSIA_ADDR 0x1FB80122
-#define SCSID_ADDR 0x1FB80126
+#define ZS_ADDR		0x1fb80d10
+#define SCSIA_ADDR	0x1FB80122
+#define SCSID_ADDR	0x1FB80126
 
 /* Target is IRIS Indigo R4000 100Mhz. */
 #define DELAY(n)							\
-do {							\
-        register int __N = 50 * n;							\
-        do {							\
-                __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));							\
+do {									\
+        register int __N = 50 * n;					\
+        do {								\
+                __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));	\
         } while (__N > 0);							\
 } while (/* CONSTCOND */ 0)
 #endif
 
 #ifdef INDY_MODE
-#define ZS_ADDR 0x1fbd9830
-#define SCSIA_ADDR 0x1FBC0003
-#define SCSID_ADDR 0x1FBC0007
+#define ZS_ADDR		0x1fbd9830
+#define SCSIA_ADDR	0x1FBC0003
+#define SCSID_ADDR	0x1FBC0007
 
 /* Target is Indy 180Mhz. */
 #define DELAY(n)							\
-do {							\
-        register int __N = 90 * n;							\
-        do {							\
-                __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));							\
-        } while (__N > 0);							\
+do {									\
+        register int __N = 90 * n;					\
+        do {								\
+                __asm("addiu %0,%1,-1" : "=r" (__N) : "0" (__N));	\
+        } while (__N > 0);						\
 } while (/* CONSTCOND */ 0)
 #endif

@@ -64,7 +64,7 @@ parse(char *argv[], char *kernelname)
 	i = 0;
 
 	while (disksetting[i] != '\0') {
-		if (disksetting[i] >='0' && disksetting[i] <='9') {
+		if (disksetting[i] >= '0' && disksetting[i] <= '9') {
 			if (i == 0)
 				scsi_ctlr = atoi(&disksetting[i]);
 			if (i == 2)
@@ -76,5 +76,5 @@ parse(char *argv[], char *kernelname)
 	}
 
 	if ((scsi_ctlr == 255) || (scsi_id == 255) || (scsi_part == 255))
-		abort();		
+		abort();
 }

@@ -41,6 +41,6 @@ struct zsdevice {
 };
 
 void *zs_init(int, int);
-int  zscngetc (void *);
-void zscnputc (void *, int);
-int zscnscanc(void *);
+int  zscngetc(void *);
+void zscnputc(void *, int);
+int  zscnscanc(void *);

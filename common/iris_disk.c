@@ -54,10 +54,11 @@ struct	disk_softc {
 
 static int diskinit(struct disk_softc *);
 
-#define	DISKRETRY  2
+#define DISKRETRY  2
 
 int
-diskstrategy(void *devdata, int rw, daddr_t bn, size_t reqcnt, void *addr, size_t *cnt)
+diskstrategy(void *devdata, int rw, daddr_t bn, size_t reqcnt, void *addr,
+    size_t *cnt)
 {
 	struct disk_softc *sc;
 	struct disklabel *lp;
@@ -75,7 +76,7 @@ diskstrategy(void *devdata, int rw, daddr_t bn, size_t reqcnt, void *addr, size_
 
 	sc->sc_retry = 0;
 	
-retry:
+ retry:
 	stat = scsi_readx28(buf, reqcnt, blk, nblk);
 
 	if (stat) {
@@ -95,13 +96,13 @@ retry:
 static int
 diskinit(struct disk_softc *sc)
 {
-	u_char capbuf[2];
+	uint8_t capbuf[2];
 
-	u_char stat;
+	uint8_t stat;
 
 	stat = scsi_test_unit_rdy();
 
-	if (stat) {
+	if (stat != 0) {
 		/* drive may be doing RTZ - wait a bit */
 		if (stat == STS_CHECKCOND) {
 			DELAY(1000000);
@@ -125,7 +126,7 @@ diskinit(struct disk_softc *sc)
 	capbuf[0] = 0;
 	capbuf[1] = 0;
 
-	stat = scsi_readx25((u_char *)capbuf, sizeof(capbuf));
+	stat = scsi_readx25((uint8_t *)capbuf, sizeof(capbuf));
 
 	if (stat == 0) {
 		if (capbuf[1] > DEV_BSIZE)
@@ -167,7 +168,8 @@ diskopen(struct open_file *f, ...)
 	lp->d_partitions[scsi_part].p_offset = 0;
 	lp->d_partitions[scsi_part].p_size = 0x7fffffff;
 
-	error = diskstrategy(sc, F_READ, (daddr_t)LABELSECTOR, DEV_BSIZE, buf, &cnt);
+	error = diskstrategy(sc, F_READ, (daddr_t)LABELSECTOR, DEV_BSIZE, buf,
+	    &cnt);
 
 	if (error || cnt != DEV_BSIZE) {
 		printf("diskstrategy error...\n");
