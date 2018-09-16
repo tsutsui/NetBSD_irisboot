@@ -38,8 +38,8 @@
 #include "iris_machdep.h"
 #include "iris_scsivar.h"
 #include "iris_scsireg.h"
-#include "iris_scsimsg.h"
 #include "iris_scsicmd.h"
+#include <dev/scsipi/scsi_message.h>
 
 #define SBIC_WAIT(regs, until, timeo) wd33c93_wait(regs, until, timeo)
 
