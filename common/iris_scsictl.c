@@ -44,7 +44,7 @@ scsi_test_unit_rdy(void)
 }
 
 int
-scsi_readx25(uint8_t *buf, size_t olen)
+scsi_read_capacity(uint8_t *buf, size_t olen)
 {
 	size_t len = olen;
 	size_t *lenp;
@@ -56,7 +56,7 @@ scsi_readx25(uint8_t *buf, size_t olen)
 }
 
 int
-scsi_readx28(uint8_t *buf, size_t olen, daddr_t blk, u_int nblk)
+scsi_read(uint8_t *buf, size_t olen, daddr_t blk, u_int nblk)
 {
 	size_t len = olen;
 	size_t *lenp;
@@ -81,7 +81,7 @@ scsi_readx28(uint8_t *buf, size_t olen, daddr_t blk, u_int nblk)
 }
 
 int
-scsi_writex2A(uint8_t *buf, size_t olen, daddr_t blk, u_int nblk)
+scsi_write(uint8_t *buf, size_t olen, daddr_t blk, u_int nblk)
 {
 	size_t len = olen;
 	size_t *lenp;

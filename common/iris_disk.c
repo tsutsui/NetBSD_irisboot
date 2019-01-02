@@ -1,3 +1,5 @@
+/*	$NetBSD: sd.c,v 1.11 2011/07/17 20:54:40 joerg Exp $	*/
+
 /*
  * Copyright (c) 2018 Naruaki Etomi
  * All rights reserved.
@@ -21,6 +23,44 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/*
+ * Copyright (c) 1988 University of Utah.
+ * Copyright (c) 1990, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Van Jacobson of Lawrence Berkeley Laboratory and the Systems
+ * Programming Group of the University of Utah Computer Science Department.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * from: Utah $Hdr: sd.c 1.9 92/12/21$
+ *
+ *	@(#)sd.c	8.1 (Berkeley) 6/10/93
  */
 
 /*
@@ -77,7 +117,7 @@ diskstrategy(void *devdata, int rw, daddr_t bn, size_t reqcnt, void *addr,
 	sc->sc_retry = 0;
 	
  retry:
-	stat = scsi_readx28(buf, reqcnt, blk, nblk);
+	stat = scsi_read(buf, reqcnt, blk, nblk);
 
 	if (stat) {
 		DELAY(1000000);
@@ -104,12 +144,10 @@ diskinit(struct disk_softc *sc)
 
 	if (stat != 0) {
 		/* drive may be doing RTZ - wait a bit */
-		if (stat == STS_CHECKCOND) {
-			DELAY(1000000);
-			stat = scsi_test_unit_rdy();
-		}
+		DELAY(1000000);
+		stat = scsi_test_unit_rdy();
 
-		if (stat) {
+		if (stat != 0) {
 			printf("diskinit abort!\n");
 			printf("Boot failed!  Halting...\n");
 #ifdef INDIGO_R3K_MODE
@@ -126,7 +164,7 @@ diskinit(struct disk_softc *sc)
 	capbuf[0] = 0;
 	capbuf[1] = 0;
 
-	stat = scsi_readx25((uint8_t *)capbuf, sizeof(capbuf));
+	stat = scsi_read_capacity((uint8_t *)capbuf, sizeof(capbuf));
 
 	if (stat == 0) {
 		if (capbuf[1] > DEV_BSIZE)

@@ -55,9 +55,9 @@ int wd33c93_go(struct wd33c93_softc *, uint8_t *, size_t, uint8_t *, size_t *);
 
 /* iris_scsictl.c */
 int scsi_test_unit_rdy(void);
-int scsi_readx25(uint8_t *, size_t);
-int scsi_readx28(uint8_t *, size_t, daddr_t, size_t);
-int scsi_writex2A(uint8_t *, size_t, daddr_t, size_t);
+int scsi_read_capacity(uint8_t *, size_t);
+int scsi_read(uint8_t *, size_t, daddr_t, size_t);
+int scsi_write(uint8_t *, size_t, daddr_t, size_t);
 
 #define INDIGO_R3K_MODE
 
