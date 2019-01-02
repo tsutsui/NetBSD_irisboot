@@ -1,4 +1,4 @@
-/*	$NetBSD: zs.c,v 1.39 2015/02/18 16:47:58 macallan Exp $	*/
+/*	$NetBSD$	*/
 
 /*
  * Copyright (c) 2018 Naruaki Etomi
@@ -58,6 +58,7 @@
  * Silicon Graphics "IRIS" series MIPS processors machine bootloader.
  * Zilog Z8530 Dual UART driver.
  * Most of the following was adapted from /sys/arch/sgimips/dev/zs.c.
+ *	NetBSD: zs.c,v 1.39 2015/02/18 16:47:58 macallan Exp
  */
 
 #include <lib/libsa/stand.h>

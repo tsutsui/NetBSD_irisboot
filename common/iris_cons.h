@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (c) 2018 Naruaki Etomi
  * All rights reserved.

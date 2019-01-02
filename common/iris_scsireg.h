@@ -1,4 +1,4 @@
-/*	$NetBSD: wd33c93reg.h,v 1.4 2009/02/12 06:24:45 rumble Exp $	*/
+/*	$NetBSD$	*/
 
 /*
  * Copyright (c) 2018 Naruaki Etomi
@@ -100,6 +100,7 @@
  * Silicon Graphics "IRIS" series MIPS processors machine bootloader.
  * WD33C93 SCSI interface hardware description.
  * Most of the following was adapted from sys/dev/ic/wd33c93reg.h.
+ *	NetBSD: wd33c93reg.h,v 1.4 2009/02/12 06:24:45 rumble Exp
  */
 
 #define SBIC_myid 		0

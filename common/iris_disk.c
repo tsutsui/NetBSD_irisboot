@@ -1,4 +1,4 @@
-/*	$NetBSD: sd.c,v 1.11 2011/07/17 20:54:40 joerg Exp $	*/
+/*	$NetBSD$	*/
 
 /*
  * Copyright (c) 2018 Naruaki Etomi
@@ -67,6 +67,7 @@
  * Silicon Graphics "IRIS" series MIPS processors machine bootloader.
  * Disk I/O API routine.
  * Most of the following was adapted from /sys/arch/hp300/stand/common/sd.c.
+ *	NetBSD: sd.c,v 1.11 2011/07/17 20:54:40 joerg Exp
  */
 
 #include <lib/libsa/stand.h>
