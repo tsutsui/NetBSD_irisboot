@@ -85,12 +85,11 @@
 #include "iris_scsivar.h"
 
 struct	disk_softc {
-	int		sc_part;			/* disk partition number */
+	int	sc_part;		/* disk partition number */
 	char	sc_retry;
 	char	sc_alive;
 	short	sc_blkshift;
 	struct	disklabel sc_label;	/* disk label for this disk */
-
 };
 
 static int diskinit(struct disk_softc *);
