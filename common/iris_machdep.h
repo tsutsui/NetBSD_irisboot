@@ -32,7 +32,8 @@
 #include "iris_scsivar.h"
 
 /* iris_boot.c */
-void abort(void);
+void again(void);
+void reboot(void);
 
 /* iris_parse.c */
 void parse(char **, char *);

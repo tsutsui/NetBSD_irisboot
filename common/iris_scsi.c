@@ -286,11 +286,7 @@ wd33c93_selectbus(struct wd33c93_softc *sc, uint8_t *cbuf, size_t clen,
 		printf("wd33c93_selectbus: wrong target selected WANTED %d GOT %d \n",
 		    target, id);
 		printf("Boot failed!  Halting...\n");
-#ifdef INDIGO_R3K_MODE
-		romrestart();
-#else
-		arcbios_Reboot();
-#endif
+		reboot();
 	}
 
 	sc->sc_flags |= SBICF_SELECTED;
@@ -462,11 +458,7 @@ wd33c93_nextstate(struct wd33c93_softc *sc, uint8_t *cbuf, size_t clen,
 		/* Something unexpected happend -- deal with it. */
 		printf("wd33c93_nextstate:abort\n");
 		printf("Boot failed!  Halting...\n");
-#ifdef INDIGO_R3K_MODE
-		romrestart();
-#else
-		arcbios_Reboot();
-#endif
+		reboot();
 	}
 	return SBIC_STATE_RUNNING;
 }

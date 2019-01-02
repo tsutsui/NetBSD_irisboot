@@ -150,11 +150,7 @@ diskinit(struct disk_softc *sc)
 		if (stat != 0) {
 			printf("diskinit abort!\n");
 			printf("Boot failed!  Halting...\n");
-#ifdef INDIGO_R3K_MODE
-			romrestart();
-#else
-			arcbios_Reboot();
-#endif
+			reboot();
 		}
 	}
 
@@ -220,7 +216,7 @@ diskopen(struct open_file *f, ...)
 	if (msg) {
 		/* If no label, just assume 0 and return */
 		printf("No disklabel...\n");
-		return 0;
+		reboot();
 	}
 
 	return 0;

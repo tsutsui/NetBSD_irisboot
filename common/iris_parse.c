@@ -46,7 +46,7 @@ parse(char *argv[], char *kernelname)
 	char *ep = strcpy(bootpath, argv[1]);
 	ep = strrchr(bootpath, '/');
 	if (ep == NULL)
-		abort();
+		again();
 
 	strcpy(kernelname, ep + 1);
 
@@ -56,7 +56,7 @@ parse(char *argv[], char *kernelname)
 	ep = strchr(bootpath, '(');
 	if (ep == NULL)
 		/* horrible! */
-		abort();
+		again();
 
 	/* ctlr,id,part */
 	strcpy(disksetting, ep + 1);
@@ -76,5 +76,5 @@ parse(char *argv[], char *kernelname)
 	}
 
 	if ((scsi_ctlr == 255) || (scsi_id == 255) || (scsi_part == 255))
-		abort();
+		again();
 }

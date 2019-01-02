@@ -88,10 +88,28 @@ main(int argc, char **argv)
 	/* initialise bootinfo structure early */
 	bi_init(bootinfo);
 
-	if (strstr(argv[1], "dksc(")) {
-		parse(argv, kernelname);
-	} else {
-		abort();
+	switch (argc) {
+#ifdef INDIGO_R3K_MODE
+	case 1:
+		again();
+		break;
+#endif
+	case 2:
+		/* To specify HDD on Indigo R3K */ 
+		if (strstr(argv[1], "dksc(")) {
+			parse(argv, kernelname);
+		} else {
+			again();
+		}
+		break;
+	default:
+		/* To specify HDD on Indigo R4K and Indy */ 
+		if (strstr(argv[1], "dksc(")) {
+			parse(argv, kernelname);
+		} else {
+			again();
+		}
+		break;
 	}
 
 	find_devs();
@@ -100,11 +118,7 @@ main(int argc, char **argv)
 
 	if (win < 0) {
 		printf("Boot failed!  Halting...\n");
-#ifdef INDIGO_R3K_MODE
-		romrestart();
-#else
-		arcbios_Reboot();
-#endif
+		reboot();
 	}
 
 	strlcpy(bi_bpath.bootpath, kernelname, BTINFO_BOOTPATH_LEN);
@@ -123,11 +137,16 @@ main(int argc, char **argv)
 }
 
 void
-abort(void)
+again(void)
 {
-
 	printf("Invalid argument\n");
 	printf("i.e., dksc(0,X,8)loader dksc(0,X,0)/kernel\n");
+	reboot();
+}
+
+void
+reboot(void)
+{
 #ifdef INDIGO_R3K_MODE
 	romrestart();
 #else
